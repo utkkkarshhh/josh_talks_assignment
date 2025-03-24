@@ -1,4 +1,5 @@
 from django.db import models
+from service.models import Users
 
 
 class Tasks(models.Model):
@@ -13,7 +14,8 @@ class Tasks(models.Model):
     task_type = models.CharField(max_length=50, blank=True, null=True)
     completed_at = models.DateTimeField(blank=True, null=True)
     status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='pending')
-    users = models.ManyToManyField('users', related_name='tasks')
+    users = models.ManyToManyField(Users, related_name='assigned_tasks')
+    creator = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='created_tasks')
     deleted_at = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
