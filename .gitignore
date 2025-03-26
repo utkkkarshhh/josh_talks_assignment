@@ -1,5 +1,4 @@
 .env
 env
 venv
-db.sqlite3
 __pycache__
